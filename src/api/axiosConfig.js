@@ -4,26 +4,8 @@ import Cookies from 'js-cookie';
 
 
 
-const refreshToken  = async () => {
-  try {
-    // let {data} = await axios.get('https://khaosathailong.vercel.app/auth/requestRefreshToken',
-    // let {data} = await axios.get('http://10.19.4.6/auth/requestRefreshToken',
-    let {data} = await axios.get('http://localhost:3000/auth/requestRefreshToken',
-    {
-      withCredentials: true,
-    });
-    
-    return data
-  } catch (error) {
-    console.log(error.message)
-  }
-}
-
 const axiosConfig = axios.create({
-    // baseURL: 'https://khaosathailong.vercel.app/',
-    // baseURL: 'http://localhost:3000/',
     baseURL: 'https://khaosathailong.vercel.app/',
-    // baseURL: 'http://10.19.4.6/',
     headers: {
     // 'Content-Type': 'multipart/form-data',
     },
@@ -47,30 +29,7 @@ axiosConfig.interceptors.request.use(async function (config) {
     if(accessToken){
       config.headers.token = `Bearer ${accessToken}`;
     }
-    // if(accessToken){
-    //   config.headers.token = `Bearer ${accessToken}`;
-    //   const decodedToken = jwt_decode(accessToken);
-      
-    //   if(decodedToken.exp < date.getTime()/1000){ // accessToken hết hạn thì phải gửi request refresh token
-     
-    //     refreshTokenRequest = refreshTokenRequest
-    //   ? refreshTokenRequest
-    //   : refreshToken();
 
-    //   const data = await refreshTokenRequest;
-
-
-    //      // reset token request for the next expiration
-    //   refreshTokenRequest = null;
-
-    //     if(data){
-    //       localStorage.setItem('accessToken_khaosathailong', data.accessToken)
-    //       config.headers.token = `Bearer ${data.accessToken}`;
-    //       Cookies.remove("refreshToken_khaosathailong");
-    //       Cookies.set("refreshToken_khaosathailong", data.refreshToken,{ expires: 7, secure: true, sameSite: "none"});
-    //     }
-    //   }
-    // };
 
     return config;
   }, function (error) {
