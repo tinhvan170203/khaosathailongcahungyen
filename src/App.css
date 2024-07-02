@@ -1,0 +1,46 @@
+
+.basic-multi-select{
+    margin: 4px;
+}
+
+.select__placeholder{
+    font-size: 14px;
+}
+
+.MuiTablePagination-selectLabel {
+    font-size: 12px!important;
+}
+.MuiTablePagination-displayedRows{
+    font-size: 12px!important;
+}
+.active{
+    background-color: blue!important;
+}
+.select__menu{
+    font-size: 13px!important;
+}
+.select__value-container{
+    font-size: 14px;
+}
+.css-m3l1ig-MuiNativeSelect-select-MuiInputBase-input.css-m3l1ig-MuiNativeSelect-select-MuiInputBase-input.css-m3l1ig-MuiNativeSelect-select-MuiInputBase-input {
+    padding-right: 24px;
+    min-width: 16px;
+    font-size: 12px;
+}
+.MuiTableCell-root{
+    padding: 4px!important;
+}
+/* .MuiButton-root{
+    min-width: 24px!important;
+} */
+.MuiFormLabel-root{
+    font-size: 12px!important;
+}
+
+.MuiInputBase-input{
+    /* padding: 0!important; */
+    font-size: 13px!important;
+}
+.basic-multi-select{
+    margin: 0;
+}

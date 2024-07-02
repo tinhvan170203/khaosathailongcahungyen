@@ -1,0 +1,37 @@
+.MuiButtonBase-root.MuiAccordionSummary-root:hover{
+   background-color: rgb(147 197 253 / var(--tw-bg-opacity))!important; 
+     color: white;
+} 
+.MuiButtonBase-root.MuiAccordionSummary-root{
+   background-color: rgb(255 255 255)!important; 
+     color: black;
+} 
+.MuiButtonBase-root.MuiAccordionSummary-root.Mui-expanded{
+   background-color: rgb(147 197 253 / var(--tw-bg-opacity))!important; 
+     color: black;
+     min-height: auto;
+} 
+.MuiButtonBase-root.MuiAccordionSummary-root.Mui-expanded:hover{
+   background-color: rgb(147 197 253 / var(--tw-bg-opacity))!important; 
+     color: white;
+} 
+
+.MuiAccordionSummary-content{
+    margin: 8px 0!important;
+}
+
+
+      .no-scrollbar::-webkit-scrollbar {
+          display: none;
+      }
+
+      /* Hide scrollbar for IE, Edge and Firefox */
+      .no-scrollbar {
+          -ms-overflow-style: none;  /* IE and Edge */
+          scrollbar-width: none;  /* Firefox */
+      }
+
+      .active > *{
+        background-color: #2974e4;
+        color: #dad6d6;
+      }
