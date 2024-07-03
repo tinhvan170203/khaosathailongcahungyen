@@ -41,7 +41,7 @@ const Baocao = () => {
 
     },
   });
-
+  const navigate = useNavigate();
   useEffect(() => {
     const fetchData = async () => {
       try {
