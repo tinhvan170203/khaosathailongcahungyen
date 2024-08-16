@@ -11,7 +11,22 @@ import donviApi from '../../api/donviApi';
 import CountUp from 'react-countup';
 import SearchIcon from '@mui/icons-material/Search'
 import TableBaocao from './components/TableCaocao';
-
+import { CSVLink } from "react-csv";
+import dayjs from "dayjs";
+import FileDownloadIcon from '@mui/icons-material/FileDownload';
+let convert = (createdAt)=>{
+  return dayjs(createdAt).format('HH:mm   ngày DD/MM/YYYY')
+}
+let headers = [
+  { label: "STT", key: "stt" },
+  { label: "Tài khoản", key: "tentaikhoan" },
+  { label: "Đơn vị", key: "donvi" },
+  { label: "Chất lượng dịch vụ công", key: "rank" },
+  { label: "Thái độ của cán bộ", key: "thaido" },
+  { label: "Thông tin công dân đánh giá", key: "sodienthoai" },
+  { label: "Ghi chú", key: "ghichu" },
+  { label: "Thời gian", key: "thoigian" }
+];
 const Baocao = () => {
   const [donvis, setDonvis] = useState([]);
   const [reports, setReports] = useState([]);
@@ -23,6 +38,7 @@ const Baocao = () => {
   const [thaidohailongCount, setThaidoHailongCount] = useState(0);
   const [thaidobinhthuongCount, setThaidoBinhthuongCount] = useState(0);
   const [thaidokhonghailongCount, setThaidoKhongHailongCount] = useState(0);
+  let [excelExport, setExcelExport] = useState([]);
   const {
     register,
     handleSubmit,
@@ -41,7 +57,9 @@ const Baocao = () => {
 
     },
   });
+
   const navigate = useNavigate();
+  
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -63,6 +81,18 @@ const Baocao = () => {
         setThaidoKhongHailongCount(res.data.thaidoratkhonghailong)
         setThaidoBinhthuongCount(res.data.thaidobinhthuong)
         setReports(res.data.data);
+        setExcelExport(res.data.data.map((item, index )=>{
+          return {
+            stt: index + 1,
+            tentaikhoan: item.account.tentaikhoan,
+            donvi: item.account.donvi.kyhieu,
+            rank: item.rank,
+            thaido: item.thaido,
+            sodienthoai: item.sodienthoai,
+            ghichu: item.ghichu,
+            thoigian: convert(item.createdAt)
+          }
+        }));
         setDonvis([{ label: "Tất cả", value: "" }].concat(res1.data.map(i => ({ label: i.tendonvi, value: i._id }))));
       } catch (error) {
         if (
@@ -101,6 +131,18 @@ const Baocao = () => {
       setThaidoKhongHailongCount(res.data.thaidoratkhonghailong)
       setThaidoBinhthuongCount(res.data.thaidobinhthuong)
       setReports(res.data.data);
+      setExcelExport(res.data.data.map((item, index )=>{
+        return {
+          stt: index + 1,
+          tentaikhoan: item.account.tentaikhoan,
+          donvi: item.account.donvi.kyhieu,
+          rank: item.rank,
+          thaido: item.thaido,
+          sodienthoai: item.sodienthoai,
+          ghichu: item.ghichu,
+          thoigian: convert(item.createdAt)
+        }
+      }));
       toast.success(res.data.message, {
         position: "top-center",
         autoClose: 2000,
@@ -191,6 +233,14 @@ const Baocao = () => {
 
       <div className='mt-4 px-4'>
         <p className='font-bold'>Thống kê chi tiết</p>
+        <IconButton>
+        <CSVLink data={excelExport} headers={headers} filename={`danhsachdanhgiadichvucong`}>
+          <div className='flex items-center shadow-md space-x-2 bg-green-300 px-2 py-1 rounded-md'>
+            <FileDownloadIcon />
+            <span className='text-sm text-green-800'>Xuất file excel</span>
+          </div>
+        </CSVLink>
+      </IconButton>
         <form className='mt-2 mx-2 md:flex md:flex-wrap shadow-lg p-4' onSubmit={handleSubmit(onSubmit)}>
           <div className='flex-col flex basis-1/6'>
             <label className='font-semibold text-[14px] text-black'>Tài khoản: </label>
